@@ -84,16 +84,31 @@ body {
 }
 
 button {
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; /* vypne modrý overlay */
     outline: none;
+    box-shadow: none;
+    user-select: none;
 }
 
 button:focus {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: inherit; /* zachová barvu tlačítka */
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+button:-moz-focusring {
     outline: none;
-    box-shadow: none;
+}
+
+button::-webkit-focus-inner {
+    border: 0;
 }
