@@ -75,8 +75,11 @@ function checkAnswer(index, button) {
         // zvýrazní správnou odpověď
         const buttons = document.getElementById("answers").children;
         buttons[correctIndex].classList.add("correct");
+        
     }
 
+    button.blur();
+    
     Array.from(document.getElementById("answers").children).forEach(b => b.disabled = true);
 
     setTimeout(() => {
