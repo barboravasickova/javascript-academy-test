@@ -82,3 +82,18 @@ body {
 .answers {
     font-family: "Urbanist", sans-serif;
 }
+
+button {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+button:active {
+    outline: none;
+    box-shadow: none;
+}
