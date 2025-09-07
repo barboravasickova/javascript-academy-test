@@ -112,3 +112,19 @@ button:-moz-focusring {
 button::-webkit-focus-inner {
     border: 0;
 }
+
+.answers button {
+    -webkit-tap-highlight-color: transparent; /* odstraní modrý overlay */
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+}
+
+.answers button:focus,
+.answers button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #007BFF; /* nebo tvá původní barva */
+}

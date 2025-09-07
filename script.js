@@ -62,7 +62,12 @@ function showQuestion() {
     const progressBar = document.getElementById("progress-bar");
     const progressPercent = ((currentQuestion) / questions.length) * 100;
     progressBar.style.width = progressPercent + "%";
+
+    // Zrušíme případný focus
+    document.activeElement.blur();
+    setTimeout(() => document.activeElement.blur(), 10);
 }
+
 
 function checkAnswer(index, button) {
     const correctIndex = questions[currentQuestion].correct;
