@@ -48,31 +48,38 @@ function showQuestion() {
     const questionElement = document.getElementById("question");
     const answersElement = document.getElementById("answers");
 
-    const questionNumber = `Otázka ${currentQuestion + 1} ze ${questions.length}: `;
-    questionElement.innerHTML = questionNumber + "<br>" + questions[currentQuestion].question;
+    // Animace otázky (fade-in)
+    questionElement.classList.remove("visible");
+    setTimeout(() => {
+        const questionNumber = `Otázka ${currentQuestion + 1} ze ${questions.length}: `;
+        questionElement.innerHTML = questionNumber + "<br>" + questions[currentQuestion].question;
+        questionElement.classList.add("visible");
 
-    answersElement.innerHTML = "";
-    questions[currentQuestion].answers.forEach((answer, index) => {
-        const button = document.createElement("button");
-        button.textContent = answer;
-        button.onclick = () => checkAnswer(index, button);
-        answersElement.appendChild(button);
-    });
+        answersElement.innerHTML = "";
+        questions[currentQuestion].answers.forEach((answer, index) => {
+            const button = document.createElement("button");
+            button.textContent = answer;
 
-    const progressBar = document.getElementById("progress-bar");
-    const progressPercent = ((currentQuestion) / questions.length) * 100;
-    progressBar.style.width = progressPercent + "%";
+            // Přidáme ochranu proti modrému overlay
+            button.style.webkitTapHighlightColor = "transparent";
 
-    // Zrušíme případný focus
-    document.activeElement.blur();
-    setTimeout(() => document.activeElement.blur(), 10);
+            button.onclick = () => checkAnswer(index, button);
+            answersElement.appendChild(button);
+        });
+
+        const progressBar = document.getElementById("progress-bar");
+        const progressPercent = ((currentQuestion) / questions.length) * 100;
+        progressBar.style.width = progressPercent + "%";
+
+        // Odstranění focusu i na mobilu
+        document.activeElement.blur();
+    }, 200);
 }
-
 
 function checkAnswer(index, button) {
     const correctIndex = questions[currentQuestion].correct;
 
-    if(index === correctIndex) {
+    if (index === correctIndex) {
         score++;
         button.classList.add("correct");
     } else {
@@ -80,22 +87,22 @@ function checkAnswer(index, button) {
         // zvýrazní správnou odpověď
         const buttons = document.getElementById("answers").children;
         buttons[correctIndex].classList.add("correct");
-        
     }
 
+    // Odstranění focusu
     button.blur();
 
+    // Zablokování všech tlačítek
     Array.from(document.getElementById("answers").children).forEach(b => b.disabled = true);
 
     setTimeout(() => {
         currentQuestion++;
-        if(currentQuestion < questions.length) {
+        if (currentQuestion < questions.length) {
             showQuestion();
-            document.activeElement.blur(); // přidáno
         } else {
             showScore();
         }
-    }, 800); // animace 0,8s
+    }, 800);
 }
 
 function showScore() {
@@ -114,3 +121,4 @@ function restartQuiz() {
 }
 
 showQuestion();
+
