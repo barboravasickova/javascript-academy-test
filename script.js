@@ -79,13 +79,14 @@ function checkAnswer(index, button) {
     }
 
     button.blur();
-    
+
     Array.from(document.getElementById("answers").children).forEach(b => b.disabled = true);
 
     setTimeout(() => {
         currentQuestion++;
         if(currentQuestion < questions.length) {
             showQuestion();
+            document.activeElement.blur(); // přidáno
         } else {
             showScore();
         }
